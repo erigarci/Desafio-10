@@ -15,12 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  #importamos include para poder trabajar con als urls de noticias
 from . import views
 #from apps.noticias import views
+
+#url del login
+from django.contrib.auth import views as auth
+from django.conf.urls.static import static
+from django.conf import settings
+
+#URL PRINCIPAL
 urlpatterns = [
 #    path('', views.inicio, name="inicio"),
     path('admin/', admin.site.urls),
     #path para urls de la vista home
-    path ('',views.home, name='home'),
-]
+    path ('',views.home, name="home"),
+    #path tiene 3 parametros direccion url, funcion de la vista(views),
+    #path de nosotros,
+    path('nosotros/', views.nosotros, name="nosotros"),
+
+#-------------URL APP NOTICIAS-----------
+    path('noticia/', include ('apps.noticias.urls')),
+
+    #LOGIN
+    #path('usuarios/login', views.login, name='login')
+    path('login/', auth.LoginView.as_view(template_name='usuarios/login.html'), name='login'),
+    path('logout/', auth.LogoutView.as_view(), name='logout'),
+
+#Registro
+path('usuarios/', include('apps.usuarios.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

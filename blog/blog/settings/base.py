@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+#import reverse_lazy para las redirecciones dentro de los formularios L/R
+from django.urls import reverse_lazy
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+
+LOGIN_REDIRECT_URL =reverse_lazy('home')
+LOGOUT_REDIRECT_URL =reverse_lazy('home')
+LOGIN_URL =reverse_lazy('login')
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
@@ -104,11 +112,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIR=(
+STATICFILES_DIRS=(
     os.path.join(os.path.dirname(BASE_DIR), 'static'),
 )
 
-MEDIA_URL= 'media/'
+MEDIA_URL= '/media/'
 
 MEDIA_ROOT= os.path.join(os.path.dirname(BASE_DIR), 'media')
 # Default primary key field type

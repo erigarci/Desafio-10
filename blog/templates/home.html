@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blog</title>
-</head>
-<body>
-    <h1>Este es el inicio de nuestro blog</h1>
-    <img src="https://espifreelancer.com/images/Django_mtv.webp" alt="error">
-</body>
-</html>
+{% extends 'base.html'%}
+{% load static %}
+
+{%block titulo%} home {%endblock titulo%}
+
+{%block contenido%}
+<h1>Este es el inicio de nuestro blog</h1>
+<img src="{% static 'img/Home.png' %}" alt="error">
+
+{%endblock contenido%} 
